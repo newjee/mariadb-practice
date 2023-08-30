@@ -32,9 +32,14 @@ select max(salary), min(salary)
   from salaries;
 
 -- 문제6.
--- 최고 어린 사원의 나이와 최 연장자의 나이는?
-select min(period_diff(date_format(birth_date, "%y"), date_format(now(), '%y'))),
-		max(period_diff(date_format(birth_date, "%y"), date_format(now(), '%y')))
+-- 최고 어린 사원의 나이와 최 연장자의 나이y는?
+-- select date_format(birth_date, "%Y"), date_format(now(), '%-- ')
+-- 		
+--   from employees;%
+--   period_diff(date_format(now(), '%Y%m')), date_format(birth_date, "%Y%m")
+  
+select abs(min(period_diff(date_format(birth_date, "%Y%m"), date_format(now(), '%Y%m'))))/12,
+		abs(max(period_diff(date_format(birth_date, "%Y%m"), date_format(now(), '%Y%m'))))/12
   from employees;
  -- where 
  
