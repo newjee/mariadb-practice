@@ -1,5 +1,5 @@
 -- 서브쿼리(SUBQUERY) SQL 문제입니다.
-
+use employees;
 -- 문제1.
 -- 현재 평균 연봉보다 많은 월급을 받는 직원은 몇 명이나 있습니까?
 select count(emp_no)
@@ -60,7 +60,9 @@ select a.emp_no, a.first_name, b.title, c.salary
 												FROM salaries a, dept_emp b
 												WHERE  a.emp_no = b.emp_no
 												   and b.to_date = '9999-01-01' AND a.to_date = '9999-01-01'
-												GROUP BY b.dept_no) e
+												GROUP BY b.dept_no
+                                                order by avg_salary desc
+                                                limit 1) e
 		
 		where a.emp_no = b.emp_no
         and b.emp_no = c.emp_no
