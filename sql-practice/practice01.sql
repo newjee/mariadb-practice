@@ -1,3 +1,5 @@
+use employees;
+
 -- 문제1)
 select concat(first_name, ' ', last_name) as full_name from employees
 where emp_no = 10944;
@@ -41,9 +43,10 @@ from salaries
 where salary > 120000;
 
 -- 9)
-select distinct title
+select distinct title 
 from titles
-order by length(title) desc;
+order by length(title) desc
+;
  
  -- 10)
 select count(emp_no)
