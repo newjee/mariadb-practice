@@ -13,8 +13,9 @@ public class TestConnection {
         Statement stmt = null;
         ResultSet rs = null;
         try {
-            //1. jdbc Driver Class 로딩
-            Class.forName("org.mariadb.jdbc.Driver");
+            //1. jdbc MyDriver Class 로딩
+            Class.forName("org.mariadb.jdbc.MyDriver");
+
 
 
             //2. 연결
