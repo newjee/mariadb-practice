@@ -1,24 +1,28 @@
 package test;
 
-import javax.swing.plaf.nimbus.State;
 import java.sql.*;
 
-public class TestConnection {
+public class InsertTest01 {
+
     public static void main(String[] args) {
-        searchEmployees("ko");
+
+        boolean result = insertDepartment("기획1팀");
+        System.out.println(result ? "성공" : "실패");
     }
 
-    public static void searchEmployees(String keyword) {
+    private static boolean insertDepartment(String name) {
+        boolean result = false;
         Connection connection = null;
         Statement stmt = null;
-        ResultSet rs = null;
         try {
             //1. jdbc MyDriver Class 로딩
             Class.forName("org.mariadb.jdbc.Driver");
 
+
+
             //2. 연결
-            String url = "jdbc:mariadb://localhost:3306/employees?charset=utf8";
-            connection = DriverManager.getConnection(url, "hr", "hr");
+            String url = "jdbc:mariadb://localhost:3306/shopping_db?charset=utf8";
+            connection = DriverManager.getConnection(url, "shopping", "shopping");
 
             System.out.println("연결 성공!");
 
@@ -27,21 +31,15 @@ public class TestConnection {
 
             //4. sql 실행
             String sql =
-                    "select emp_no, first_name, last_name" +
-                            "  from employees" +
-                            " where first_name like '%" + keyword + "%'" +
-                            "   and last_name like '%" + keyword + "%'";
+                    "insert" +
+                    "   into member_name" +
+                    "value ( null, '" + name + "')";
 
-            rs = stmt.executeQuery(sql);
+
+            int count = stmt.executeUpdate(sql);
 
             //5. 결과
-            while (rs.next()) {
-                Long empNo = rs.getLong(1);
-                String firstName = rs.getString(2);
-
-                String lastName = rs.getString(3);
-                System.out.println(empNo + ":" + firstName + ":" + lastName);
-            }
+            result = count == 1;
 
 
         } catch (ClassNotFoundException e) {
@@ -50,9 +48,7 @@ public class TestConnection {
             System.out.println("error:" + e);
         } finally {
             try {
-                if (rs != null) {
-                    rs.close();
-                }
+
                 if (stmt != null) {
                     stmt.close();
                 }
@@ -63,6 +59,6 @@ public class TestConnection {
                 System.out.println("error" + e);
             }
         }
-
+        return result;
     }
 }
