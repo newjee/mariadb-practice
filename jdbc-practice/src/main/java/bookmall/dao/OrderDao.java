@@ -9,4 +9,17 @@
 //    findBookByNo() {
 //
 //    }
+//
+//
+//    insertOrder() {
+//        return ord_no
+//
+//    }
+//    insertOrderBooks() {
+//        ord_no;
+//        book_no;
+//
+//    }
+//
+//
 //}
